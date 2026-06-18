@@ -1,0 +1,14 @@
+# backend
+
+## Cache do Python
+__pycache__/
+
+## Variáveis de ambiente e ambiente virtual
+.env
+.venv
+
+# frontend
+## Node modules
+node_modules/
+
+package.json
