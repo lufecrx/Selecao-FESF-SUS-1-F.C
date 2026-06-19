@@ -8,14 +8,9 @@ def _clean_cpf(cpf: str) -> str:
 
 
 def _validate_cpf_checksum(cpf: str) -> bool:
-    """Valida o dígito verificador do CPF.
-
-    Implementação do algoritmo padrão do CPF brasileiro.
-    """
     cpf = _clean_cpf(cpf)
     if len(cpf) != 11:
         return False
-    # rejeita sequências repetidas (11111111111, 00000000000, ...)
     if cpf == cpf[0] * 11:
         return False
 
@@ -76,5 +71,4 @@ class PacienteUpdate(BaseModel):
 class PacienteOut(PacienteBase):
     id: int
 
-    # Habilita leitura direta de objetos ORM (SQLAlchemy)
     model_config = {"from_attributes": True}

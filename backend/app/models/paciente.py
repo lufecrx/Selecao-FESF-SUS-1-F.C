@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, Text, DateTime, func
-from .database import Base
+from sqlalchemy.orm import relationship
+from ..database import Base
 
 
 class Paciente(Base):
@@ -15,3 +16,11 @@ class Paciente(Base):
     observacoes = Column(Text, nullable=True)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    # Relacionamento com Agendamento (back_populates definido no outro lado)
+    agendamentos = relationship(
+        "Agendamento",
+        back_populates="paciente",
+        cascade="all, delete-orphan",
+        lazy="select",
+    )
