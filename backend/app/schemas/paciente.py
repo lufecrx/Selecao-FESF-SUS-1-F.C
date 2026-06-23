@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr, field_validator
+from pydantic_core import PydanticCustomError
 from datetime import date
 import re
 
@@ -41,7 +42,7 @@ class PacienteBase(BaseModel):
     def cpf_must_be_valid(cls, v: str) -> str:
         v_clean = _clean_cpf(v)
         if not _validate_cpf_checksum(v_clean):
-            raise ValueError("CPF inválido")
+            raise PydanticCustomError("cpf_invalido", "CPF inválido")
         return v_clean
 
 
@@ -64,7 +65,7 @@ class PacienteUpdate(BaseModel):
             return None
         v_clean = _clean_cpf(v)
         if not _validate_cpf_checksum(v_clean):
-            raise ValueError("CPF inválido")
+            raise PydanticCustomError("cpf_invalido", "CPF inválido")
         return v_clean
 
 

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, field_validator
+from pydantic_core import PydanticCustomError
 from datetime import datetime
 from typing import Optional
 from .paciente import PacienteOut
@@ -18,7 +19,10 @@ class AgendamentoCreate(AgendamentoBase):
     def date_not_in_past(cls, v: datetime) -> datetime:
         now = datetime.now(v.tzinfo) if v.tzinfo else datetime.now()
         if v < now:
-            raise ValueError("data_hora não pode ser uma data passada")
+            raise PydanticCustomError(
+                "data_hora_passada",
+                "data_hora não pode ser uma data passada",
+            )
         return v
 
 
@@ -36,7 +40,10 @@ class AgendamentoUpdate(BaseModel):
             return v
         now = datetime.now(v.tzinfo) if v.tzinfo else datetime.now()
         if v < now:
-            raise ValueError("data_hora não pode ser uma data passada")
+            raise PydanticCustomError(
+                "data_hora_passada",
+                "data_hora não pode ser uma data passada",
+            )
         return v
 
 
