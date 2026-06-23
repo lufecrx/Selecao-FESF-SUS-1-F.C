@@ -100,6 +100,9 @@ export default function NovoPacientePage() {
       return;
     }
 
+    // limpar erros de validação anteriores antes do envio
+    setErrors({});
+
     try {
       setLoading(true);
 
@@ -124,8 +127,17 @@ export default function NovoPacientePage() {
       }, 2000);
     } catch (err) {
       const apiError = err as ApiError;
-      if (apiError.status === 400) {
-        setApiError('CPF já cadastrado. Use um CPF diferente.');
+      // Se a API retornou erros por campo, mostre abaixo dos inputs
+      if (apiError.fieldErrors && Object.keys(apiError.fieldErrors).length > 0) {
+        setErrors(apiError.fieldErrors as FormErrors);
+        setApiError(null);
+      } else if (apiError.status === 400) {
+        // mensagem genérica sobre CPF duplicado
+        if (apiError.message && apiError.message.toLowerCase().includes('cpf')) {
+          setErrors({ cpf: apiError.message });
+        } else {
+          setApiError('CPF já cadastrado. Use um CPF diferente.');
+        }
       } else {
         setApiError(apiError.message || 'Erro ao cadastrar paciente');
       }
