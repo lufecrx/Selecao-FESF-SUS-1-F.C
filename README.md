@@ -1,29 +1,15 @@
-# VidaPlena — (FESF-SUS)
+# Gestão de Saúde - Next.js + FastAPI
 
-**Seleção FESF-SUS – 1 F.C**  
-*Foco: Desenvolvimento Funcional da API e da Interface*
-
----
-
-## 📋 Índice
-
-1. [Descrição do Sistema](#descrição-do-sistema)
-2. [Stack Tecnológica](#stack-tecnológica)
-3. [Pré-requisitos de Instalação](#pré-requisitos-de-instalação)
-4. [Rodando o Backend](#rodando-o-backend)
-5. [Rodando o Frontend](#rodando-o-frontend)
-6. [Variáveis de Ambiente](#variáveis-de-ambiente)
-7. [Testando a API](#testando-a-api)
-8. [Validando a Interface](#validando-a-interface)
+Desenvolvimento Funcional da API e da Interface de um sistema de gestão de saúde.
 
 ---
 
 ## Descrição do Sistema
 
-O **VidaPlena** é um sistema web para **gerenciamento de pacientes e controle integrado de agendamentos em saúde familiar**. O sistema atende a dois objetivos principais:
+Trata-se de um sistema web para gerenciamento de pacientes e controle integrado de agendamentos em saúde familiar. O sistema atende a dois objetivos principais:
 
-1. **Gerenciamento de Pacientes** — Cadastro e listagem de pacientes com validação de CPF (incluindo verificação de dígitos verificadores e unicidade), campos opcionais (email, telefone, sexo, observações) e interface responsiva com feedback visual de erros.
-2. **Controle de Agendamentos** — Criação e listagem com filtros (por paciente, status e intervalo de datas).
+1. **Gerenciamento de Pacientes**
+2. **Controle de Agendamentos**
 
 O projeto é composto por uma **API RESTful** construída com FastAPI/Python e um **frontend SPA** desenvolvido com Next.js 14/React, comunicando-se via requisições HTTP.
 
@@ -76,13 +62,6 @@ Antes de iniciar, certifique-se de ter os seguintes itens instalados em seu sist
 ### Frontend
 
 - **Node.js 18.x ou superior** com `npm` (ou `yarn`/`pnpm`)
-  - Recomenda-se o uso do [`nvm`](https://github.com/nvm-sh/nvm):
-
-    ```bash
-    # Instalar Node.js 20 LTS
-    nvm install 20
-    nvm use 20
-    ```
 
 ---
 
@@ -109,16 +88,6 @@ source .venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-
-As dependências principais incluem:
-
-- `fastapi` — Framework da API
-- `uvicorn[standard]` — Servidor ASGI
-- `sqlalchemy` — ORM
-- `pydantic` — Validação de esquemas
-- `email-validator` — Validação de email
-- `aiosqlite` — Driver assíncrono para SQLite
-- `pytest` + `httpx` — Testes
 
 ### 4. Iniciar o servidor
 
@@ -170,13 +139,6 @@ Com o backend rodando em `http://localhost:8000`, acesse:
 http://localhost:8000/docs
 ```
 
-Esta é a documentação automática gerada pelo FastAPI, que permite:
-
-- **Visualizar todas as rotas**
-- **Testar requisições diretamente**
-- **Verificar esquemas de validação**
-- **Examinar respostas esperadas**
-
 ## Validando a Interface
 
 ### Acesso
@@ -187,4 +149,3 @@ Com o frontend rodando, acesse:
 http://localhost:3000
 ```
 
-*Desenvolvido para o Processo de Seleção FESF-SUS*
